@@ -7,7 +7,6 @@ import styles from './AddUser.module.css'
 const AddUser = (props) => {
   const [enteredUsername, setEnteredUsername] = useState('')
   const [enteredAge, setEnteredAge] = useState('')
-  const [isValidAge, setIsValidAge] = useState(true)
   
   const addUserHandler = (event) => {
     event.preventDefault()
