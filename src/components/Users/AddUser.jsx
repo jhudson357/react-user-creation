@@ -5,28 +5,47 @@ import Button from "../UI/Button"
 import styles from './AddUser.module.css'
 
 const AddUser = (props) => {
-  const [userData, setUserData] = useState()
+  const [enteredUsername, setEnteredUsername] = useState('')
+  const [enteredAge, setEnteredAge] = useState('')
+  const [isValidAge, setIsValidAge] = useState(true)
   
   const addUserHandler = (event) => {
     event.preventDefault()
-    setUserData({
-      username: event.target[0].value,
-      age: event.target[1].value,
-      id: Math.floor(Math.random() * 100)
-    })
-    // console.log(event.target[0].value)
-    // console.log(event.target[1].value)
-    // console.log(userData)
-    props.getUserData(userData)
+    if (enteredUsername.trim().length === 0 || enteredAge.trim().length === 0) {
+      return
+    }
+    if (+enteredAge < 0) return
+    setEnteredUsername('')
+    setEnteredAge('')
+  }
+    
+  const usernameChangeHandler = (event) => {
+    setEnteredUsername(event.target.value)
+  }
+  
+  const ageChangeHandler = (event) => {
+    setEnteredAge(event.target.value)
   }
   
   return (
     <Card className={styles.input}>
       <form onSubmit={addUserHandler}>
         <label htmlFor="username">Username</label>
-        <input id="username" type="text" autoComplete="off"/>
+        <input
+          id="username"
+          type="text" 
+          autoComplete="off" 
+          onChange={usernameChangeHandler}
+          value={enteredUsername}
+        />
         <label htmlFor="age">Age (Years)</label>
-        <input id="age" type="number" autoComplete="off"/>
+        <input 
+          id="age" 
+          type="number" 
+          autoComplete="off" 
+          onChange={ageChangeHandler}
+          value={enteredAge}
+        />
         <Button type="submit">Add User</Button>
       </form>
     </Card>
