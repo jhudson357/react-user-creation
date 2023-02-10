@@ -2,6 +2,7 @@ import { useState } from "react"
 import Card from "../UI/Card"
 import Button from "../UI/Button"
 import ErrorModal from "../UI/ErrorModal"
+import Wrapper from "../Helpers/Wrapper"
 
 import styles from './AddUser.module.css'
 
@@ -45,7 +46,13 @@ const AddUser = (props) => {
   
   return (
     <>
-      {error && <ErrorModal title={error.title} message={error.message} onHandleError={errorHandler}/>}
+      {error && (
+        <ErrorModal 
+          title={error.title} 
+          message={error.message} 
+          onHandleError={errorHandler}
+        />
+      )}
       <Card className={styles.input}>
         <form onSubmit={addUserHandler}>
           <label htmlFor="username">Username</label>
